@@ -4,6 +4,16 @@ This is a collection of scripts or knowledge about REST API.
 
 An API, or Application Programming interface, is a server that you can use to retrieve and send data to using code.
 
+## Components
+
+**Endpoint** : The URL that tied to a specific resource within an API.
+**Method** : - GET: retrieve data
+             - PUT: replace data
+             - POST: create data
+             - DELETE: delete data
+**Data** : If you are using a method that involves changing data in a REST API, you will need to include a data payload with the request that includes all data that will be created for modified.
+**Headers** : Contain any metedata that needs to be included with the request, such as authentication tokens, the content type should be returned, and any caching policies.
+
 When we want to receive data from an API, we need to make a **Request** .
 
 ```pythonscript
