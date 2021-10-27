@@ -16,11 +16,48 @@ This request is used to retrieve data.
 
 Required parameter: **URL**
 
-Example:
-- response = requests.get('http://web.mta.info/developers/turnstile.html')
 
-The get() function returns a response object. 
+The get() function returns a response object.
+```pythonscript
+response = requests.get('https://api.open-notify.org/astros.json') # no parameter required
+
+parameters={}
+response = requests.get('https://api.open-notify.org/astros.json', params=parameters) # parameter required
+```
+
 Receive the status code for the request:
-- print(response.status_code) 
+```pythonscript
+print(response.status_code) 
+```
+
+- 200: Everything went okay, and the result has been returned.
+- 301: The server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint name is changed.
+- 400: The server thinks you made a bad request. This can happen when you don't send along the right data, among other things.
+- 401: The server thinks you are not authenticated. This can happen when you send wrong credentials to access an API.
+- 403: You don't have right permissions to see the content.
+- 404: The resource you tried to access wasn't found on the server
+- 503: The server is not ready to handle the request.
+
+Each API is commonly called **endpoint** .
+
+See the data we received back from the API:
+```pythonscript
+response.json()
+```
+Handle json data:
+- json.dump(): takes in a python object, and convets it to a string.
+- json.loads(): takes a JSON string, and convetts it to a python object.
+
+```pythonscript
+import json
+
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+
+jprint(response.json())
+```
+
 
 
