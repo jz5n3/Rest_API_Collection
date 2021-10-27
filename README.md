@@ -14,7 +14,7 @@ import requests
 
 This request is used to retrieve data. 
 
-Required parameter: **URL**
+Required parameter: **URL, parameters**
 
 
 The get() function returns a response object.
@@ -22,7 +22,7 @@ The get() function returns a response object.
 response = requests.get('https://api.open-notify.org/astros.json') # no parameter required
 
 parameters={}
-response = requests.get('https://api.open-notify.org/astros.json', params=parameters) # parameter required
+response = requests.get('https://api.open-notify.org/astros.json', params=parameters) # parameter required, parameters can be defined as a dictionary
 ```
 
 Receive the status code for the request:
@@ -59,5 +59,5 @@ def jprint(obj):
 jprint(response.json())
 ```
 
-
+## (2) POST request
 
