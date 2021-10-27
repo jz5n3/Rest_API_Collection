@@ -8,10 +8,11 @@ An API, or Application Programming interface, is a server that you can use to re
 
 **Endpoint** : The URL that tied to a specific resource within an API.
 
-**Method** : - GET: retrieve data
-             - PUT: replace data             
-             - POST: create data             
-             - DELETE: delete data
+**Method** : 
+1. GET: retrieve data
+2. PUT: replace data 
+3. POST: create data
+4. DELETE: delete data
              
 **Data** : If you are using a method that involves changing data in a REST API, you will need to include a data payload with the request that includes all data that will be created for modified.
 
