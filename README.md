@@ -24,7 +24,7 @@ When we want to receive data from an API, we need to make a **Request** .
 import requests
 ```
 
-## (1) GET request
+### (1) GET request
 
 This request is used to retrieve data. 
 
@@ -35,8 +35,22 @@ The get() function returns a response object.
 ```pythonscript
 response = requests.get('https://api.open-notify.org/astros.json') # no parameter required
 
+# if parameter is required, parameters can be defined as a dictionary
 parameters={}
-response = requests.get('https://api.open-notify.org/astros.json', params=parameters) # parameter required, parameters can be defined as a dictionary
+response = requests.get('https://api.open-notify.org/astros.json', params=parameters) 
+
+# if authentication is required, there are many ways to define authentication
+# username & password
+response = requests.get('https://api.github.com/user', auth=HTTPBasicAuth('username', 'password'))
+# access token
+my_headers = {'Authorization' : 'Bearer {access_token}'}
+response = requests.get('http://httpbin.org/headers', headers=my_headers)
+# other authentication methods: digest, Kerberos, NTLM, AuthBase
+
+# if you need to make multiple requests within a single session, utilize Session objects
+session = requests.Session()
+session.headers.update({'Authorization': 'Bearer {access_token}'})
+response = session.get('https://httpbin.org/headers')
 ```
 
 Receive the status code for the request:
@@ -73,5 +87,34 @@ def jprint(obj):
 jprint(response.json())
 ```
 
-## (2) POST request
+### (2) POST / PUT request
+
+```pythoscript
+# Create a new resource
+response = requests.post('https://httpbin.org/post', data = {'key':'value'})
+# Update an existing resource
+requests.put('https://httpbin.org/put', data = {'key':'value'})
+```
+
+**Access REST Headers***
+```pythonscript
+print(response.headers["date"]) 
+'Wed, 11 June 2020 19:32:24 GMT'
+```
+
+## Robust API Request Example
+```pythonscript
+try:
+    response = requests.get('http://api.open-notify.org/astros.json', timeout=5)
+    response.raise_for_status()
+    # Code here will only run if the request is successful
+except requests.exceptions.HTTPError as errh:
+    print(errh)
+except requests.exceptions.ConnectionError as errc:
+    print(errc)
+except requests.exceptions.Timeout as errt:
+    print(errt)
+except requests.exceptions.RequestException as err:
+    print(err)
+```
 
